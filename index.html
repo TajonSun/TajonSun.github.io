@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>喧闹的城堡 · 资料站｜经验 · 制作材料计算 · 活动</title>
+  <meta name="description" content="《喧闹的城堡》(Hustle Castle) 玩家资料站：开局与居民经验、红装重做与资源攒积计算器、活动玩法速查，并标注资料来源与未核实缺口。">
+  <meta name="color-scheme" content="dark">
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="喧闹的城堡资料站首页">
+        <span class="brand-mark" aria-hidden="true">🏰</span>
+        <span class="brand-text">
+          <strong>喧闹的城堡</strong>
+          <small>资料站 / Hustle Castle</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#experience">经验</a>
+        <a href="#calculator">材料计算</a>
+        <a href="#events">活动</a>
+        <a href="#sources">数据说明</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">玩家向资料整理 · 非官方站点</p>
+          <h1>把城堡经营、配装与材料规划放在一页里</h1>
+          <p class="lede">
+            汇总《喧闹的城堡》开局顺序、居民与配装经验，提供可以直接算数的重做精粹、资源攒积与训练排程工具，
+            并把活动玩法单独整理成可维护的数据模块。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#calculator">直接去算材料</a>
+            <a class="btn btn-ghost" href="#experience">先看经验</a>
+          </div>
+        </div>
+        <aside class="hero-meta" aria-label="站点信息">
+          <dl>
+            <div>
+              <dt>资料核对日</dt>
+              <dd id="meta-check-date">—</dd>
+            </div>
+            <div>
+              <dt>版本参考</dt>
+              <dd id="meta-version">—</dd>
+            </div>
+            <div>
+              <dt>活动数据</dt>
+              <dd>机制与建议为主，不写未核实日期</dd>
+            </div>
+          </dl>
+          <p class="meta-note" id="meta-disclaimer"></p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">01 / 经验</p>
+          <h2 id="experience-title">开局、居民、配装：先做对顺序</h2>
+          <p class="section-lede">
+            核心结论：先把王国大殿升上去解锁其他功能，居民优先养高星「队长」而不是见五星就收，
+            装备靠分解重做反复重roll，前期资源以掠夺为主、少铺生产工人。
+          </p>
+        </div>
+        <div class="card-grid" id="experience-grid">
+          <noscript><p class="empty">此部分需要启用 JavaScript 才能显示完整卡片内容。</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="calculator" aria-labelledby="calculator-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">02 / 制作材料计算</p>
+          <h2 id="calculator-title">三个能直接算出数字的工具</h2>
+          <p class="section-lede">
+            输入数值即刻计算，无需提交、不联网。所有口径都写在每个工具下方，避免把估算当成游戏内精确值。
+          </p>
+        </div>
+
+        <div class="tool-stack">
+          <article class="tool" aria-labelledby="tool-essence-title">
+            <header class="tool-head">
+              <h3 id="tool-essence-title">红装重做精粹计算</h3>
+              <p>按「分解得基础装备 + 精粹，再用同一件基础装备重做」的机制，估算重做所需精粹与需要额外分解的件数。</p>
+            </header>
+            <form class="tool-form" id="form-essence" novalidate>
+              <div class="field">
+                <label for="essence-part">装备部位</label>
+                <select id="essence-part" name="part"></select>
+              </div>
+              <div class="field">
+                <label for="essence-rerolls">计划重做次数</label>
+                <input id="essence-rerolls" name="rerolls" type="number" min="0" step="1" inputmode="numeric" value="3">
+              </div>
+              <div class="field">
+                <label for="essence-stock">现有精粹</label>
+                <input id="essence-stock" name="stock" type="number" min="0" step="1" inputmode="numeric" value="0">
+                <p class="hint">没有就填 0。</p>
+              </div>
+            </form>
+            <p class="calc-error" id="err-essence" role="alert" aria-live="polite"></p>
+            <div class="result" id="result-essence" aria-live="polite"></div>
+            <p class="tool-note" id="note-essence"></p>
+          </article>
+
+          <article class="tool" aria-labelledby="tool-resource-title">
+            <header class="tool-head">
+              <h3 id="tool-resource-title">资源攒积时间计算</h3>
+              <p>算清「还差多少、按当前小时产出要多久才能凑够」，用于建筑升级、训练与制作前的资源规划。</p>
+            </header>
+            <form class="tool-form" id="form-resource" novalidate>
+              <div class="field">
+                <label for="resource-target">目标数量</label>
+                <input id="resource-target" name="target" type="number" min="1" step="any" inputmode="decimal" value="100000">
+              </div>
+              <div class="field">
+                <label for="resource-current">当前数量</label>
+                <input id="resource-current" name="current" type="number" min="0" step="any" inputmode="decimal" value="20000">
+              </div>
+              <div class="field">
+                <label for="resource-rate">每小时产出</label>
+                <input id="resource-rate" name="rate" type="number" min="0.01" step="any" inputmode="decimal" value="2500">
+              </div>
+            </form>
+            <p class="calc-error" id="err-resource" role="alert" aria-live="polite"></p>
+            <div class="result" id="result-resource" aria-live="polite"></div>
+            <p class="tool-note" id="note-resource"></p>
+          </article>
+
+          <article class="tool" aria-labelledby="tool-training-title">
+            <header class="tool-head">
+              <h3 id="tool-training-title">训练排程计算</h3>
+              <p>早期训练位有限，用批次排程算清这批居民全部练完要多久、最后一轮还剩几个人。</p>
+            </header>
+            <form class="tool-form" id="form-training" novalidate>
+              <div class="field">
+                <label for="training-people">待训练人数</label>
+                <input id="training-people" name="people" type="number" min="1" step="1" inputmode="numeric" value="5">
+              </div>
+              <div class="field">
+                <label for="training-slots">训练位数量</label>
+                <input id="training-slots" name="slots" type="number" min="1" step="1" inputmode="numeric" value="2">
+              </div>
+              <div class="field">
+                <label for="training-minutes">单人训练时长（分钟）</label>
+                <input id="training-minutes" name="minutes" type="number" min="1" step="any" inputmode="decimal" value="60">
+              </div>
+            </form>
+            <p class="calc-error" id="err-training" role="alert" aria-live="polite"></p>
+            <div class="result" id="result-training" aria-live="polite"></div>
+            <p class="tool-note" id="note-training"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="events" aria-labelledby="events-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">03 / 活动</p>
+          <h2 id="events-title">活动玩法速查</h2>
+          <p class="section-lede" id="events-lede">
+            竞技场、传送门、黑门、部落战与节日活动构成了主要收益循环。公开渠道拿不到可靠的当期排期，
+            因此这里只写机制与参与建议，并把活动数据独立成可编辑文件。
+          </p>
+        </div>
+        <div class="event-grid" id="event-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="sources" aria-labelledby="sources-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">04 / 数据说明</p>
+          <h2 id="sources-title">来源、口径与还没补齐的部分</h2>
+          <p class="section-lede">
+            本站只整理能追溯来源的内容。下面同时列出出处和缺口，方便你判断哪些可以直接用、哪些需要进游戏核对。
+          </p>
+        </div>
+        <div class="split">
+          <article class="panel">
+            <h3>资料来源</h3>
+            <ol class="source-list" id="source-list"></ol>
+          </article>
+          <article class="panel">
+            <h3>尚未核实 / 未收录</h3>
+            <ul class="gap-list" id="gap-list"></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>《喧闹的城堡》资料站 · 玩家整理，非官方站点 · 数据核对日 <span id="footer-check-date">—</span></p>
+      <p class="footer-note">本站以纯静态方式部署，可直接托管在 GitHub Pages；活动数据在 <code>data/events.js</code> 中维护。</p>
+    </div>
+  </footer>
+
+  <script src="data/content.js?v=2"></script>
+  <script src="data/events.js?v=2"></script>
+  <script src="assets/js/calc.js?v=2"></script>
+  <script src="assets/js/app.js?v=2"></script>
+</body>
+</html>
